@@ -56,10 +56,10 @@ public void onScannedRobot(ScannedRobotEvent e) {
 		setTurnRight(e.getBearing() + 30 );
 		setAhead(150);
 		double lturn = (e.getBearing() + getHeading() ) - getGunHeading() ;
-		if(lturn > 0){
+		if(lturn < 180){
 			turnGunLeft(lturn);
 		}else{
-			turnGunRight(lturn);
+			turnGunRight(360 - lturn);
 		}
 
 		fire(1);
