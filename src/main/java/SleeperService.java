@@ -40,22 +40,20 @@ public class SleeperService extends AdvancedRobot
 public void onScannedRobot(ScannedRobotEvent e) {	
 		setTurnRadarRight(getHeading() - e.getBearing() + getRadarHeading() );
 		setTurnRight(e.getBearing());
-		if (e.getDistance() > 250) {
-			setAhead(250);
+		if (e.getDistance() > 200) {
+			setAhead(200);
 		} else if (e.getDistance() > 150) {
 			setAhead(100);
-			turnGunLeft(getGunHeading() - getHeading());
-			fire(1);
 		} else{ 
-			circleAndKill(e);
+			fire(5);
 		}	
 	}
 	
 
 	private void circleAndKill(ScannedRobotEvent e){
-		setTurnRight(e.getBearing() + 30 );
+		setTurnRight(e.getBearing() + 90 );
 		setAhead(150);
-		double lturn = (e.getBearing() + getHeading() ) - getGunHeading() ;
+		double lturn = (getHeading() - e.getBearing() ) + getGunHeading() ;
 		if(lturn < 180){
 			turnGunLeft(lturn);
 		}else{
