@@ -6,8 +6,12 @@ import robocode.*;
 /**
  * GSV - a robot by (your name here)
  */
-public class SleeperService extends Robot
+public class SleeperService extends AdvancedRobot
 {
+
+	double lastSeenRobotBearnig = 0;
+
+	
 	/**
 	 * run: GSV's default behavior
 	 */
@@ -18,22 +22,44 @@ public class SleeperService extends Robot
 		// and the next line:
 
 		// setColors(Color.red,Color.blue,Color.green); // body,gun,radar
-
 		// Robot main loop
 		while(true) {
 			// Replace the next 4 lines with any behavior you would like
-			ahead(100);
-			turnGunRight(360);
-			back(100);
-			turnGunRight(360);
+			turnRadarRight(360);
+			
+	
+			
+
 		}
 	}
+	
+
 
 	/**
 	 * onScannedRobot: What to do when you see another robot
 	 */
-	public void onScannedRobot(ScannedRobotEvent e) {
-		// Replace the next line with any behavior you would like
+public void onScannedRobot(ScannedRobotEvent e) {	
+		setTurnRadarRight(getHeading() - e.getBearing() + getRadarHeading() );
+		setTurnRight(e.getBearing());
+		if (e.getDistance() > 250) {
+			setAhead(250);
+		} else if (e.getDistance() > 150) {
+			setAhead(100);
+			turnGunLeft(getGunHeading() - getHeading());
+			fire(1);
+		} else if (e.getDistance() > 100) {
+			turnGunLeft(getGunHeading() - getHeading());
+			fire(1);
+		} else {
+			circleAndKill(e);
+		}
+	}
+	
+
+	private void circleAndKill(ScannedRobotEvent e){
+		setTurnRight(e.getBearing() + 45 );
+		setAhead(150);
+		turnGunLeft(getGunHeading() - e.getBearing());
 		fire(1);
 	}
 
@@ -42,7 +68,7 @@ public class SleeperService extends Robot
 	 */
 	public void onHitByBullet(HitByBulletEvent e) {
 		// Replace the next line with any behavior you would like
-		back(10);
+
 	}
 	
 	/**
@@ -50,6 +76,6 @@ public class SleeperService extends Robot
 	 */
 	public void onHitWall(HitWallEvent e) {
 		// Replace the next line with any behavior you would like
-		back(20);
+
 	}	
 }
