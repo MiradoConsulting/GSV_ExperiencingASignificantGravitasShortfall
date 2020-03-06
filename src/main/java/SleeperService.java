@@ -47,19 +47,22 @@ public void onScannedRobot(ScannedRobotEvent e) {
 			setAhead(100);
 			turnGunLeft(getGunHeading() - getHeading());
 			fire(1);
-		} else if (e.getDistance() > 100) {
-			turnGunLeft(getGunHeading() - getHeading());
-			fire(1);
-		} else {
+		} else{ 
 			circleAndKill(e);
-		}
+		}	
 	}
 	
 
 	private void circleAndKill(ScannedRobotEvent e){
-		setTurnRight(e.getBearing() + 45 );
+		setTurnRight(e.getBearing() + 30 );
 		setAhead(150);
-		turnGunLeft(getGunHeading() - e.getBearing());
+		double lturn = e.getBearing() - getGunHeading() ;
+		if(lturn > 0){
+			turnGunLeft(lturn);
+		}else{
+			turnGunRight(lturn);
+		}
+
 		fire(1);
 	}
 
