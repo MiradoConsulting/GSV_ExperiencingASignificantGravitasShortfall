@@ -45,7 +45,7 @@ public void onScannedRobot(ScannedRobotEvent e) {
 		} else if (e.getDistance() > 150) {
 			setAhead(100);
 		} else{ 
-			fire(5);
+			fire(10);
 		}	
 	}
 	
