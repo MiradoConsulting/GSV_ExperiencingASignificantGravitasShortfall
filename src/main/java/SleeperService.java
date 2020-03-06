@@ -6,7 +6,7 @@ import robocode.*;
 /**
  * GSV - a robot by (your name here)
  */
-public class ExperiencingASignificantGravitasShortfall extends Robot
+public class SleeperService extends Robot
 {
 	/**
 	 * run: GSV's default behavior
