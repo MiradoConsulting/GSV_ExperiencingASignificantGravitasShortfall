@@ -20,7 +20,6 @@ public class SleeperService extends AdvancedRobot
 
 		// After trying out your robot, try uncommenting the import at the top,
 		// and the next line:
-
 		// setColors(Color.red,Color.blue,Color.green); // body,gun,radar
 		// Robot main loop
 		while(true) {
@@ -56,7 +55,7 @@ public void onScannedRobot(ScannedRobotEvent e) {
 	private void circleAndKill(ScannedRobotEvent e){
 		setTurnRight(e.getBearing() + 30 );
 		setAhead(150);
-		double lturn = e.getBearing() - getGunHeading() ;
+		double lturn = (e.getBearing() + getHeading() ) - getGunHeading() ;
 		if(lturn > 0){
 			turnGunLeft(lturn);
 		}else{
